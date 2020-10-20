@@ -133,6 +133,49 @@ time stamp:
 
 ====================
 
+State management:
+When state changes react will rerenders things for us. Going to store all of the to dos inside of a state.
+In order to use state, need to use the useState hook.
+Import useState from react in App component.
+Call useState function and pass in default state. For to dos the default is an emtpy array. So for the
+first time the app loads, we will use an empty array of todos.
+Set a veriable; useState returns an array, the first element is all of the to dos and the second is a function that allows to update to dos.
+
+```
+const [todos, setTodos] = useState([]);
+```
+
+As an example, add some to dos to the array.
+
+```
+const [todos, setTodos] = useState(['to do 1', 'to do 2', 'to do 3']);
+```
+
+Pass to dos by adding them to the TodoList component as a prop.
+
+```
+<TodoList todos={todos} />
+```
+
+We have a prop in TodoList and we are passing it the todos variable.
+In TodoList.js add the prop and display the number of to dos in the view.
+
+```
+export default function TodoList({ todos }) {
+    return (
+        <div>
+            { todos.length }
+        </div>
+    )
+}
+```
+
+It should show the number 3 at the top now, which is the number of items in the todos list that was passed into the component via prop.
+
+time stamp:
+11:30
+
+====================
 
 
 
