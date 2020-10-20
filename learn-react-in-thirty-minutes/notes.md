@@ -55,6 +55,16 @@ time stamp:
 
 ====================
 
+Remove boilerplate code in App.js and `return null` instead. Remove css and logo import also.
+Remove App.test.js, index.css, App.css, logo.svg, serviceWorker.js.
+In index.js remove `serviceWorker.unregister()`, the import for serviceWorker and index.css.
+(The tutorial doesn't have a `setupTests.js` so it's probably also safe to remove that from the app).
+The only files left inside src should be index.js and App.js.
+
+time stamp:
+5:22
+
+====================
 
 
 
