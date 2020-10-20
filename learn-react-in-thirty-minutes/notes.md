@@ -177,6 +177,41 @@ time stamp:
 
 ====================
 
+To print out each to do, loop through to do array by creating a new to do component.
+Create new file Todo.js and 'rfc' it and add the todo prop/element.
+In the TodoList component import Todo.
+Now the Todo element is available in the TodoList component. We can now loop through/map over the list of to dos and
+return the ToDo element/component and pass it a todo via the prop.
+
+```
+export default function TodoList({ todos }) {
+    return (
+        todos.map(todo => {
+            return <Todo todo={todo} />
+        })
+    )
+}
+```
+
+Inside of Todo.js we can print out the todo.
+
+```
+export default function Todo({ todo }) {
+    return (
+        <div>
+            { todo }
+        </div>
+    )
+}
+```
+
+It should list all three to dos at the top.
+
+time stamp:
+12:43
+
+====================
+
 
 
 
