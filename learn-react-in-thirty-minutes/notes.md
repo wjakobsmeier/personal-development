@@ -60,11 +60,36 @@ Remove App.test.js, index.css, App.css, logo.svg, serviceWorker.js.
 In index.js remove `serviceWorker.unregister()`, the import for serviceWorker and index.css.
 (The tutorial doesn't have a `setupTests.js` so it's probably also safe to remove that from the app).
 The only files left inside src should be index.js and App.js.
+The app should not throw any errors and should load a blank page at this point of time.
 
 time stamp:
 5:22
 
 ====================
+
+Goal is to write a To do app for this tutorial. Let's start with the HTML code first.
+Start inside the App component to write the HTML for the application.
+Use parenthesis in the return statement to return everything within them.
+```
+return (
+    <TodoList />
+)
+```
+We are embedding a component inside our App component.
+Let's create a new file TodoList.js in the src folder.
+(Assuming the ES7/React/ VSC plugin is installed).
+type `rfc` then enter should generate a react function component with the name TodoList which is the name of the file.
+Add Hello world inside the div for the view.
+Go to App.js and import the TodoList component.
+The app should not throw any errors and should show Hello World.
+
+time stamp:
+7:13
+
+====================
+
+
+
 
 
 
