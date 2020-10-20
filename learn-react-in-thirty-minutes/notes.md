@@ -212,8 +212,51 @@ time stamp:
 
 ====================
 
+Notice how there is a console warning:
 
+```
+Warning: Each child in a list should have a unique "key" prop. See https://fb.me/react-warning-keys for more information.
+    in TodoList (at App.js:13)
+    in App (at src/index.js:7)
+    in StrictMode (at src/index.js:6)
+```
 
+React requires each item in a list to have a unique identifier to ensure that when an item changes, that only that one gets rerendered.
+This is to avoid rerendering the entire list for efficiency puroses.
+Add a key to the Todo element in the TodoList component.
 
+```
+return <Todo key={todo} todo={todo} />
+```
 
+While this works, it's not ideal as the to do right now is just a string and they may not be unique.
+Also, a to do requires a name, id, and a completed status. Update the array in App.js.
 
+```
+const [todos, setTodos] = useState([
+    {
+        id: 1,
+        name: 'to do 1',
+        isCompleted: false
+    },
+    {
+        id: 2,
+        name: 'to do 2',
+        isCompleted: false
+    },
+    {
+        id: 3,
+        name: 'to do 3',
+        isCompleted: false
+    }
+]);
+```
+
+Update the key in TodoList.js to be todo.id.
+Update Todo component to show the todo.name.
+It should list all three to dos.
+
+time stamp:
+14:26
+
+====================

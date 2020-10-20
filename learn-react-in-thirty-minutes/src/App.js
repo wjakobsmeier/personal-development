@@ -3,9 +3,24 @@ import TodoList from './TodoList';
 
 function App() {
 
-    // const [state, setstate] = useState(initialState)
     // default state - when it loads empty array
-    const [todos, setTodos] = useState(['to do 1', 'to do 2', 'to do 3']);
+    const [todos, setTodos] = useState([
+        {
+            id: 1,
+            name: 'to do 1',
+            isCompleted: false
+        },
+        {
+            id: 2,
+            name: 'to do 2',
+            isCompleted: false
+        },
+        {
+            id: 3,
+            name: 'to do 3',
+            isCompleted: false
+        }
+    ]);
 
     useState([])
     return (
