@@ -24,6 +24,7 @@ npm run eject
 app structure:
 
 index.html contains a div into which our entire app will be loaded into. React will generate our HTML and put it in there.
+
 ```
 <div id="root"></div>
 ```
@@ -35,6 +36,7 @@ This is where our application starts.
 
 ReactDOM.render(arg1, arg2):
 Render the content we pass as arg1 at a certain element arg2.
+
 ```
 ReactDOM.render(
   <React.StrictMode>
@@ -43,6 +45,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 ```
+
 Render the app component into #root found in index.html
 
 App.js:
@@ -70,11 +73,13 @@ time stamp:
 Goal is to write a To do app for this tutorial. Let's start with the HTML code first.
 Start inside the App component to write the HTML for the application.
 Use parenthesis in the return statement to return everything within them.
+
 ```
 return (
     <TodoList />
 )
 ```
+
 We are embedding a component inside our App component.
 Let's create a new file TodoList.js in the src folder.
 (Assuming the ES7/React/ VSC plugin is installed).
@@ -87,6 +92,47 @@ time stamp:
 7:13
 
 ====================
+
+Add input for new to do in App.js.
+We can not just add `<input type="text" />` inside the return as two jsx elements can not be put inside a return.
+
+```
+Parsing error: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>?
+```
+
+As a function can only return one thing, a fix for returning more than one jsx element is to wrap them with an empty element, the fragment:
+
+```
+return (
+    <>
+        <TodoList />
+        <input type="text" />
+    </>
+);
+```
+
+Add a button to add to dos.
+Add a button to clear to dos.
+Add a container to show how many to dos are left to do.
+This should render all necessary static elements for the app component, all the HTML for our to dos will go inside the TodoList component.
+
+```
+return (
+    <>
+        <TodoList />
+        <input type="text" />
+        <button>Add To do</button>
+        <button>Clear To dos</button>
+        <div>0 to dos left</div>
+    </>
+);
+```
+
+time stamp:
+8:40
+
+====================
+
 
 
 
