@@ -267,7 +267,7 @@ Build out the to do by adding a check box and a label.
 return (
     <div>
         <label>
-            <input type="checkbox" checked="{ todo.isCompleted }" />
+            <input type="checkbox" checked={ todo.isCompleted } />
             { todo.name }
             { todo.isCompleted }
         </label>
@@ -316,7 +316,7 @@ Add a function to add the new to do to the existing list of to dos via the setTo
 
 ```
 setTodos(prevTodos => {
-    return [...prevTodos, { id: 1, name: 'some thing', isComplete: false }]
+    return [...prevTodos, { id: 1, name: 'some thing', isCompleted: false }]
 })
 ```
 
@@ -338,7 +338,7 @@ Import the uuid into our app and add it to the setTodos function (note had to re
 import { v4 as uuidv4 } from 'uuid';
 ...
 setTodos(prevTodos => {
-    return [...prevTodos, { id: uuidv4(), name: name, isComplete: false }]
+    return [...prevTodos, { id: uuidv4(), name: name, isCompleted: false }]
 })
 ```
 
@@ -395,6 +395,59 @@ useEffect(() => {
 Adding to dos and reloading the page should load the previously added to dos.
 
 time stamp:
-19:28
+22:27
 
 ====================
+
+Need to add toggle function for the to dos to check it off and store the change of that specific to do.
+Create a function in App component that toggles a to do, which takes in the id of that to do.
+In react always create a copy of a state variable.
+Then modify it, then use that modified copy to set the new state.
+
+```
+function toggleTodo(id) {
+    // copy
+    const newTodos = [...todos];
+    const updatedTodo = newTodos.find(todo => todo.id === id);
+    // modify
+    updatedTodo.isCompleted = !updatedTodo.isCompleted;
+    // set/overwrite to do list
+    setTodos(newTodos);
+}
+```
+
+But `toggleTodo()` can't be used as is as the to do is inside the ToDo component, which is referenced inside the TodoList component, which is referenced inside the App component.
+Need to pass the function down to TodoList component:
+
+```
+<TodoList todos={todos} toggleTodo={toggleTodo} />
+```
+
+Inside TodoList component add/import the `toggleTodo` prop and pass it down to the individual to dos:
+
+```
+return <Todo key={todo.id} toggleTodo={toggleTodo} todo={todo} />
+```
+
+Inside ToDo component import the `toggleTodo` prop.
+In the input add an onChange which will handle passing an id to the toggleTodo function.
+
+```
+<input type="checkbox" checked={ todo.isCompleted }  onChange={handleTodoClick} />
+```
+
+Add the function handler that passed the to do's id to toggleTodo:
+
+```
+function handleTodoClick() {
+    toggleTodo(todo.id)
+}
+```
+
+The toggle state for the input should now change and should be be restored on page reload.
+
+time stamp:
+25:33
+
+====================
+

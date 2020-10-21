@@ -24,6 +24,17 @@ function App() {
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos))
     }, [todos])
 
+    function toggleTodo(id) {
+        // copy
+        const newTodos = [...todos];
+        const updatedTodo = newTodos.find(todo => todo.id === id);
+        // modify
+        updatedTodo.isCompleted = !updatedTodo.isCompleted;
+        // set/overwrite to do list
+        console.log('newTodos: ', newTodos);
+        setTodos(newTodos);
+    }
+
     function handleAddTodo(event) {
         const name = todoNameRef.current.value;
         // if input is empty do nothing
@@ -32,17 +43,16 @@ function App() {
         }
         // add the new to do to the list of all to dos
         setTodos(prevTodos => {
-            return [...prevTodos, { id: uuidv4(), name: name, isComplete: false }]
+            return [...prevTodos, { id: uuidv4(), name: name, isCompleted: false }]
         })
         // clear the inpiut
         todoNameRef.current.value = null;
-        console.log('name: ', name);
     }
 
     useState([])
     return (
         <>
-            <TodoList todos={todos} />
+            <TodoList todos={todos} toggleTodo={toggleTodo} />
             <input ref={todoNameRef} type="text" />
             <button onClick={handleAddTodo}>Add To do</button>
             <button>Clear To dos</button>
