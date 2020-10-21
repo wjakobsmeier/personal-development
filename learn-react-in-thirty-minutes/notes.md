@@ -451,3 +451,28 @@ time stamp:
 
 ====================
 
+Update the number of how many to dos are unchecked. Add a filter for to dos that are not completed and get their length:
+
+```
+<div>{todos.filter(todo => !todo.isCompleted).length} to dos left</div>
+```
+
+To clear completed to dos add an onClick event to the clear button. That function will filter the list of to dos to only return to dos that are not completed. That list is then set to the todo list via the setTodos function:
+
+```
+<button onClick={handleClearTodos}>Clear To dos</button>
+...
+function handleClearTodos() {
+    const incompleteTodos = todos.filter(todo => !todo.isCompleted);
+    setTodos(incompleteTodos);
+}
+```
+
+Clicking to clear to dos show remove checked/completed to dos. Toggling the checkbox should update the number of to dos left accordingly.
+
+time stamp:
+26:55
+
+====================
+
+END OF TUTORIAL

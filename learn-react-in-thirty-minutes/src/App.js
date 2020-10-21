@@ -31,7 +31,6 @@ function App() {
         // modify
         updatedTodo.isCompleted = !updatedTodo.isCompleted;
         // set/overwrite to do list
-        console.log('newTodos: ', newTodos);
         setTodos(newTodos);
     }
 
@@ -49,14 +48,19 @@ function App() {
         todoNameRef.current.value = null;
     }
 
+    function handleClearTodos() {
+        const incompleteTodos = todos.filter(todo => !todo.isCompleted);
+        setTodos(incompleteTodos);
+    }
+
     useState([])
     return (
         <>
             <TodoList todos={todos} toggleTodo={toggleTodo} />
             <input ref={todoNameRef} type="text" />
             <button onClick={handleAddTodo}>Add To do</button>
-            <button>Clear To dos</button>
-            <div>0 to dos left</div>
+            <button onClick={handleClearTodos}>Clear To dos</button>
+            <div>{todos.filter(todo => !todo.isCompleted).length} to dos left</div>
         </>
     );
 }
