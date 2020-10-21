@@ -3,7 +3,11 @@ import React from 'react'
 export default function Todo({ todo }) {
     return (
         <div>
-            { todo.name }
+            <label>
+                <input type="checkbox" checked="{ todo.isCompleted }" />
+                { todo.name }
+                { todo.isCompleted }
+            </label>
         </div>
     )
 }

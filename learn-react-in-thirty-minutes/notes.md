@@ -260,3 +260,54 @@ time stamp:
 14:26
 
 ====================
+
+Build out the to do by adding a check box and a label.
+
+```
+return (
+    <div>
+        <label>
+            <input type="checkbox" checked="{ todo.isCompleted }" />
+            { todo.name }
+            { todo.isCompleted }
+        </label>
+    </div>
+)
+```
+
+Remove all the static to dos from the useState in the App component as we should start with a blank state when we first start the app.
+Want to add to dos when we click on Add to do button. Add onClick listener to that button.
+
+```
+<button onClick={handleAddTodo}>Add To do</button>
+```
+
+Add the function to the component.
+
+```
+function handleAddTodo(event) {
+
+}
+```
+
+This function should add the new to do to the list of existing to dos. In order to get access to the contents of the input use useRef hook. This allows us to reference elements inside of HTML.
+Import useRef from react.
+
+```
+import React, { useState, useRef } from 'react';
+```
+
+create a variable for the reference of the HTML input to have access to it. To get the value of the input use:
+
+```
+const name = todoNameRef.current.value
+```
+
+log out name to see if the button is working.
+Clicking on the add to do button should log out the Input text.
+
+time stamp:
+17:28
+
+====================
+
