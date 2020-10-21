@@ -1,29 +1,28 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import TodoList from './TodoList';
+import { v4 as uuidv4 } from 'uuid';
+
+const LOCAL_STORAGE_KEY = 'todoApp.todos'
 
 function App() {
 
     // default state - when it loads empty array
     const [todos, setTodos] = useState([]);
-    // const [todos, setTodos] = useState([
-    //     {
-    //         id: 1,
-    //         name: 'to do 1',
-    //         isCompleted: true
-    //     },
-    //     {
-    //         id: 2,
-    //         name: 'to do 2',
-    //         isCompleted: false
-    //     },
-    //     {
-    //         id: 3,
-    //         name: 'to do 3',
-    //         isCompleted: false
-    //     }
-    // ]);
 
     const todoNameRef = useRef();
+
+    // onload
+    useEffect(() => {
+        const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+        if (storedTodos) {
+            setTodos(storedTodos);
+        }
+    }, [])
+
+    // watcher - when todos is updated
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos))
+    }, [todos])
 
     function handleAddTodo(event) {
         const name = todoNameRef.current.value;
@@ -31,6 +30,12 @@ function App() {
         if (name === '') {
             return;
         }
+        // add the new to do to the list of all to dos
+        setTodos(prevTodos => {
+            return [...prevTodos, { id: uuidv4(), name: name, isComplete: false }]
+        })
+        // clear the inpiut
+        todoNameRef.current.value = null;
         console.log('name: ', name);
     }
 

@@ -311,3 +311,90 @@ time stamp:
 
 ====================
 
+Clear the text input by setting the current value to null.
+Add a function to add the new to do to the existing list of to dos via the setTodos function.
+
+```
+setTodos(prevTodos => {
+    return [...prevTodos, { id: 1, name: 'some thing', isComplete: false }]
+})
+```
+
+Using a static id will cause error:
+
+```
+Warning: Encountered two children with the same key, `1`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+```
+
+Download a randomizer library (note: could we not just use the length of the existing to dos array and increment its length by 1 for the id?). In terminal type:
+
+```
+npm i uuid
+```
+
+Import the uuid into our app and add it to the setTodos function (note had to reference from the npm docs: https://www.npmjs.com/package/uuid):
+
+```
+import { v4 as uuidv4 } from 'uuid';
+...
+setTodos(prevTodos => {
+    return [...prevTodos, { id: uuidv4(), name: name, isComplete: false }]
+})
+```
+
+Page should show newly added to dos and not show unique key warning.
+
+time stamp:
+19:28
+
+====================
+
+Problem: page/to dos are not persistent, a page reload will reset the to dos. This can be fixed by storing data in local storage.
+Every time we add a to do to the list, we can save this side effect, use useEffect react hook.
+useEffect takes as its first parameter a function which dictates what we want to do.
+Every time something changes we want to call the first function.
+To determine when to call this first function pass in array of properties as a second paramenter of useEffect.
+This array is a list of dependencies, any time anything in this array changes, the useEffect function is run.
+Every time the list of todos changes, save todos to localstorage.
+Add setItem requires a key, create a key.
+Then pass it a string to store, stringify the todos.
+
+```
+import React, { useState, useRef, useEffect } from 'react';
+...
+const LOCAL_STORAGE_KEY = 'todoApp.todos'
+...
+localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos))
+
+```
+
+Every time a to do is added, the list of to dos is added to the local storage.
+When the page is reloaded the list needs to be restored. Use useEffect but pass in empty array of dependencies.
+This will only load once when the component is loaded. Since the array is empty it will never call it again.
+On load get the list of to dos and set them if they exist. Make sure to parse the string back to an array to avoid error:
+
+```
+TypeError: todos.map is not a function
+```
+
+```
+// onload
+useEffect(() => {
+    const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    if (storedTodos) {
+        setTodos(storedTodos);
+    }
+}, [])
+
+// watcher - when todos is updated
+useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos))
+}, [todos])
+```
+
+Adding to dos and reloading the page should load the previously added to dos.
+
+time stamp:
+19:28
+
+====================
