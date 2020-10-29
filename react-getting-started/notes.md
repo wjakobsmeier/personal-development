@@ -6,6 +6,8 @@ https://app.pluralsight.com/library/courses/react-js-getting-started/table-of-co
 
 notes/instructions:
 
+## The Basics
+
 # Why React?
 React is a small JS library requires other libraries to form a complete solution.
 React builds user interfaces. Anything that uses JS we can use react to describe a web user interface.
@@ -549,6 +551,148 @@ Where to define the state?
 As close as possible to the children who need access to the value of the state.
 
 # Component reusability
+
+Make a component generic enough so that it can be reused.
+The Button component should be updated so that we can pass in an increment value instead of the hard coded +1 for now.
+The amount to increment will be a property of the component will be dynamic passed down by the parent.
+Add 4 buttons with increments of: 1, 5, 20, 100.
+
+```
+function Button(props) {
+    return (
+        <button onClick{props.onClickFunction}>
+            +{props.increment}
+        </button>
+    )
+}
+
+function Display(props) {
+	return (
+        <div>{props.message}</div>
+    );
+}
+
+function App() {
+    const [counter, setCounter] = useState(0);
+    const incrementCounter = () => setCounter(counter + 1);
+
+    return (
+        <>
+            <Button onClickFunction={incrementCounter} increment={1} />
+            <Button onClickFunction={incrementCounter} increment={5} />
+            <Button onClickFunction={incrementCounter} increment={20} />
+            <Button onClickFunction={incrementCounter} increment={100} />
+            <Display message={counter} />
+        </>
+    )
+}
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('mountNode'),
+);
+```
+
+But the buttons do not increment the label as per their incremented values yet.
+
+Exercise:
+Try and update the code for the handlers to update based on their increments.
+
+```
+function Button(props) {
+  function handleClick () {
+    return props.onClickFunction(props.increment);
+  }
+  return (
+  	<button onClick={handleClick}>
+      +{props.increment}
+    </button>
+  );
+}
+
+function Display(props) {
+  return (
+  	<div>{props.message}</div>
+  );
+}
+
+function App() {
+  const [counter, setCounter] = useState(0);
+  const incrementCounter = (incrementValue) => setCounter(counter+incrementValue);
+	return (
+    <div>
+      <Button onClickFunction={incrementCounter} increment={1} />
+      <Button onClickFunction={incrementCounter} increment={5} />
+      <Button onClickFunction={incrementCounter} increment={10} />
+      <Button onClickFunction={incrementCounter} increment={100} />
+      <Display message={counter}/>
+    </div>
+  );
+}
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('mountNode'),
+);
+```
+
+The incrementCounter function needs to receive a value, use its argument to do that.
+The Button onClick function needs a reference to a function, can not just pass and argument and invoke the function.
+Create and use a local handle function.
+Solution accessible at https://jscomplete.com/playground/rgs1.5
+
+# Tree reconciliation in action
+
+What is the value of creating HTML in JS?
+See https://jscomplete.com/playground/rgs1.7
+
+JS version uses innerHTML which uses a string to represent the content.
+In the React version we used pure JS calls and represented the content with an object.
+Every HTML element will be represented with a JS object using a React.createElement call.
+Add input and pre to show a time stamp and nest both render approaches into a render function which runs an interval of 1000 ms.
+This should update the time stamp.
+
+See https://jscomplete.com/playground/rgs1.8
+
+But if you were to type in the first box it would reset. The react approach will not reset as the only thing that will update is the time stamp container itself.
+That is React's smart diffing algorithm at work (https://reactjs.org/docs/reconciliation.html).
+It only regenerates in its DOM node what actually needs to be regenerated, everything remains the same.
+This is because React uses a virtual DOM and we have a representation of user interface in memory because it was written in JS.
+For every tick/update, React keeps the last UI version in memory, and a new version will also be in memory.
+React will compute the difference between new and old versions and then instruct the browser to update only the computed diff and not the whole DOM node.
+
+# Wrap up
+
+A react application is a set of reusable components.
+Components are just like functions, they take an input and output a description of a user interface in the form of a React element.
+The React DOM library enables us to render those react elements in the browser and will rerender them automatically when their in memory state changes.
+We accomplish this by writing the components markup using the React JS API.
+React has a way to write the virtual DOM close to the HTML syntax we are used to, known as JSX.
+The input for a component is a set of properties accessible inside the component named props.
+
+```
+(props) => {}
+```
+
+Can also use set of state elements a component can access with the special useState function.
+
+```
+[value, setVal] = useState(initialVal)
+```
+
+A component state can be changed inside that component.
+The props are immutable, but the state is mutable.
+Every time a component changes its state, react rerenders it.
+The props of a component can not be changed by the whole component can be rerendered with different props by the component's parent.
+Syntax to mount a React component in the browser is `ReactDOM.create`, which takes two arguments; the component to render (`<Component />`) and the HTML element to hold the React rendered markup.
+React has normalized events, like `onClick`, `onSubmit`, etc., that work accross all browsers.
+React has two types of components: function and class components.
+
+## Modern JS crash course
+
+# ECMAScript and TC39
+
+
 
 
 
