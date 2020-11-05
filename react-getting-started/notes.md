@@ -692,6 +692,178 @@ React has two types of components: function and class components.
 
 # ECMAScript and TC39
 
+Yearly JS updates by the workgroup.
+
+# Variables and block scopes
+
+Block scope is created with a pair of curly brackets.
+
+```
+{
+    // block scope
+    {
+        // nested block scope
+    }
+}
+
+if (true) {
+    // block scope
+}
+
+for(var i = 0, i <= 10, i++) {
+    // block scope
+}
+
+function sum(a, b) {
+    // function scope
+    return a + b;
+}
+```
+
+Block scopes are different form function scopes.
+Function scopes are created for each function.
+Variables created inside a function can not be accessed outside of it.
+But the variable i created in the for loop is accessible outside the for loop, it would return 11 in the above example.
+To fix this, use `let` instead of `var`, to avoid out of scope access.
+To protect nested scope, use `let` or `const`.
+References defined with `const` can not be changed.
+String and interger scalar values are immutable and using const their references can not be changed either.
+Using `const` ensures that the variables is pointing to the same array or object, but the but their contents can still be mutated.
+Use `const` for scalar values that do not change.
+
+# Arrow Functions
+
+A way to create a function without typing the word function
+
+```
+const X = function() {
+    // 'this' here is the caller of X
+}
+
+const Y = () => {
+    // 'this' here is not the called of Y
+    // It's the same 'this' found in Y's scope
+}
+```
+
+WOrks more predictably with closures.
+An arrow function does not care who calls it, while a regular function does.
+Regular functions give access to their 'calling'  environment  while arrow functions gives access to their 'defining' environment.
+The value of the 'this' keyword inside a regular function depends on how the function was called (the object that made the call).
+The value of the 'this' keyword inside an arrow function depends on where the function was defined (the scope that defined the function).
+
+# Object literals
+
+```
+const mystery = 'answer';
+const inverseOfPi = 1/Math.PI;
+
+const obj = {
+    p1: 10,
+    p2: 20,
+    f1() {}, // property that defines a function
+    f2: () => {}, // property arrow function
+    [mystery]: 42, // dynamic properties
+    inverseOfPi // short for of inverseOfPi: inverseOfPi
+}
+
+console.log(obj.mystery) // undefined - mystery property was defined with a dymanic property syntax. JS will evaluate the myster experssion first.
+console.log(obj.answer) // 42
+
+```
+
+# Destructuring and Rest/Spread
+
+```
+// const PI = Math.PI
+// const E = Math.E
+// const SQRT2 = Math.SQRT2
+
+// these 3 lines can be destructured into a single line.
+const { PI, E, SQRT2 } = Math;
+```
+
+Destructured three properties out of its right hand object into the current scope.
+
+```
+// in react app - destructuring used to add functionality from the react API.
+// const { Component, Fragment, useState } = rquire('react');
+// useState()
+```
+
+Destructuring also works in function arguments.
+If the argument passed to the function is an object, instead of using the name of the object to access its properties, use the destructuring syntax within the function parenthesis to destructure the properties interested in to make them local to the function.
+
+```
+const circle = {
+    label: 'some label',
+    radius: 2
+}
+
+const circleArea = ({radius}) => {
+    (PI * radius * radius).toFixed(2)
+}
+
+// adding default value to destructured argument:
+const circleAreaWithDefault = ({radius}, {precision = 1}) => {
+    (PI * radius * radius).toFixed(precision)
+}
+
+// to make the precision/second argument optional:
+const circleAreaWithOptionalDefault = ({radius}, {precision = 1} = {}) => {
+    (PI * radius * radius).toFixed(precision)
+}
+
+console.log(circleArea(circle)) // 12.57
+console.log(circleAreaWithOptionalDefault(circle)) // 12.6
+console.log(circleAreaWithDefault(circle, {precision: 5})) // 12.56637
+```
+
+You can also destructor arrays into local variables. Use item's position.
+
+```
+const [first, second,, fourth] = [1, 20, 30, 40];
+// first 1
+// second 20
+// fourth 40
+```
+
+To split an array:
+
+```
+const [first, ...rest] = [1, 2, 3, 4];
+// first = 1
+// rest = [2, 3, 4]
+```
+
+To filter out properties from an object:
+
+```
+const data = {
+  temp1: 1,
+  temp2: 2,
+  fName: 'first'
+  lName: 'last'
+}
+
+const {temp1, temp2, ...person} = data;
+// temp1 = 1
+// temp2 = 2
+// person = {fName: 'first', lName: 'last'}
+```
+
+To copy arrays and objects can use spread operator:
+
+```
+new arr = [...someArray]
+new obj = {...someObj}
+```
+
+Note, these are shallow copies and nested objects or arrays will be shared between these copies.
+
+# Template strings
+
+
 
 
 
