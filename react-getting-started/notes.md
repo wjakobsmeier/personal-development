@@ -863,6 +863,80 @@ Note, these are shallow copies and nested objects or arrays will be shared betwe
 
 # Template strings
 
+String literals uses single or double quotes to define strings. `""` and `''`.
+Modern JS can define strings with backticks `\``.
+
+```
+const str = 'Hello';
+const str2 = "World";
+const back = `<div></div>`;
+const val = `<div>${Math.random()}</div>`; // will show div with random value inside of it
+const multiLine = `
+  <div>
+    <h1>stuff</h1>
+    <br>
+    <p>
+      ${Math.random()}
+    </p>
+  </div>
+`;
+```
+
+# Classes
+
+Everything in JS is objects, including functions. Modern JS added support for class syntax.
+A class is a template/blueprint for a defined, shared structure, and behaviour between similar objects.
+You can define new classes, extend other classes, and instantiate objects out of them using the `new` keyword.
+You can customize the construction of each object and define shared functions between these objects.
+Person class and Student class, which extends the Person class.
+Every Student is also a Person. Both classes define a constructor function.
+The constructor function is special as it gets called every time we instantiate an object out of the class with the `new` keyword.
+
+
+```
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+
+  greet() {
+    console.log(`Hello ${this.name}!`);
+  }
+}
+
+class Student extends Person {
+  constructor(name, level) {
+    super(name);
+    this.level = level;
+  }
+
+  greet() [
+    console.log(`Hello ${this.name} from ${this.level}!`);
+  ]
+}
+
+const o1 = new Person("Max"); // instantiates from Person class
+const o2 = new Student("Tina", "1st grade"); // instantiates from the Student class
+const o3 = new Student("Mary", "2nd grade"); // instantiates from the Student class
+o3.greet = () => console.log("I am special");
+
+o1.greet();
+o2.greet();
+o3.greet();
+```
+
+Passed in arguments when instantiating these objects are accessible in the constructor function of the class.
+THe person class expects a name argument and it stores its value on the instance using the `this` keyword.
+Student class expects name and level argument and it stores its level value on its instance and since it extends the persona class
+it will call the super method with the name argument which will invoke the person class constructor functiomn and store the name as well.
+Both classes define a greet function which uses the values they store in each instance.
+The third object `o3` a greet function directly on the object was defined.
+`o1` uses greet method from Person class.
+`o2` uses greet method from Student class.
+`o3` uses its own directly defined greet method.
+
+# Promises and Async/Await
+
 
 
 
