@@ -975,6 +975,17 @@ To make `await` calls, the function needs to be labelled as `async`.
 The async await syntax is a way to consume promises without having to nest .then calls.
 It is simpler to read BUT once you await anything in a function, the function itself becomes asynchronous and will return a promise object.
 
+## The github cards app
+
+# What we are building
+
+Have not worked with real data yet. WIll use the public github rest API to get data.
+Will build github card compoennt that displays information about list of github profiles.
+Form where user can enter github handle and use button to add profile to the list of displayed profiles.
+Use user inputs to make API calls.
+Going to use react class components.
+Be comfortable to use react class and function components.
+
 
 
 
