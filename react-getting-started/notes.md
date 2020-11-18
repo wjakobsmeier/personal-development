@@ -937,7 +937,43 @@ The third object `o3` a greet function directly on the object was defined.
 
 # Promises and Async/Await
 
+```
+const fetchData = () => {
+  fetch('https://api.github.com')
+    .then(resp => {
+      resp.json()
+        .then(data => {
+          console.log('data: ', data);
+        })
+    })
+}
+fetchData();
+```
 
+Async operations, usually deal with promise objects.
+A promise is an object that might deliver data at a later point in the program.
+Example async function that returns a promise is the web fetch API that is natively available in some browsers.
+Here were are fetching information from the top level github api.
+Since fetch returns a promise to consume that promise we do a `.get` call on the result of fetch which supplies a callback function.
+This call back function will gives us the data from the api. The raw response from the fetch needs to be parsed to JSON.
+`JSON` method is also asynchronous so it, too, returns a promise.
+To get that data we need another .then call on the result of the .json method.
+On the call back of that we can access the data.
+Nested asynchronous operations or looping logic could be complicate the above.
+There is a modern alternative to the above to comsume promises, which does not rely on .then but rather uses `async` and `await`.
+
+```
+const fetchData = async () => {
+  const resp = await fetch('https://github.com);
+  const data = await resp.json();
+  console.log(data);
+}
+fetchData();
+```
+
+To make `await` calls, the function needs to be labelled as `async`.
+The async await syntax is a way to consume promises without having to nest .then calls.
+It is simpler to read BUT once you await anything in a function, the function itself becomes asynchronous and will return a promise object.
 
 
 
