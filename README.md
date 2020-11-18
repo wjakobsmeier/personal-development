@@ -6,6 +6,7 @@ list of tutorials/articles/etc:
 
 1. learn-react-in-thirty-minutes
 2. react-getting-started
+3. react-js-from-scratch
 
 list of tutorials not yet started:
 
