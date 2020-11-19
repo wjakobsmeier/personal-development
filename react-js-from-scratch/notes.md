@@ -52,6 +52,38 @@ https://www.youtube.com/watch?v=yc8fg7gWbBA&list=PL7pEw9n3GkoVAqCMVTz2mKthyWr-sv
 
 # JSX intro | React tutorial series
 
+Playground tool for html to react conversion:
+https://babeljs.io/repl
+
+class and for are reserved words in XML so use className and htmlFor in JSX instead.
+
+```
+render() {
+  return (
+    <div>
+      <h1>hello</h1>
+    </div>
+  )
+}
+```
+
+This can be refactored to:
+
+```
+function SayHello() {
+  return (
+    <h1>hello</h1>
+  )
+}
+
+render() {
+  return (
+    <div>
+      <SayHello></SayHello>
+    </div>
+  )
+}
+```
 
 
 
