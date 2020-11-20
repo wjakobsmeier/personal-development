@@ -85,9 +85,90 @@ render() {
 }
 ```
 
+video 3:
+https://www.youtube.com/watch?v=uGgPINlKqBs&list=PL7pEw9n3GkoVAqCMVTz2mKthyWr-svpQJ&index=3
 
+# React Class vs Functional Component | ReactJS tutorial Series Part 3
 
+Class components are written by extending the React component object.
+Functional ES6 components, easier to write than class components.
 
+Create new react project and start it up:
+
+```
+create-react-app react-class-vs-function-component
+cd react-class-vs-function-component
+npm start
+```
+
+Remove boilerplate from App.js.
+Create two components: one is a class component the other is an ES6 functional component.
+In src folder create new folder called users, and create a new file called Users.js inside of it.
+Users.js will be the class based component.
+Import React and Component, create the class which extends Component, and export it.
+
+```
+import React, { Component } from 'react';
+
+class Users extends Component {
+
+}
+
+export default Users;
+```
+
+Inside the class add the render method.
+
+```
+render() {
+  return <div>Users</div>
+}
+```
+
+To include the Users component in App component, import it.
+
+```
+import { Users } from "./users/Users";
+```
+
+To use it just embed it in the JSX as `<Users/>`.
+Components always start with a capital letter to differentiate them from HTML.
+Create a User functional subcomponent inside the Users folder called User.js.
+Not going to extend as it is pure function but still need to import React.
+Name of the function will be User but first define it as a const so it is mutatable (but not replaceable), as an arrow function.
+Unlike class component, functional components do not need to have a render function, but rather can simply return the JSX element.
+Export User so it is importable.
+
+```
+import React from "react";
+
+const User = () => {
+  return (
+    <div>
+      user
+    </div>
+  )
+}
+
+export default User;
+```
+
+The User component can now be reused. Use it inside Users.
+First import the User component then add it to the render method a few times.
+The result is a static output of the User component.
+
+To add more functionality, add the name to each User component.
+A function component has access to props.
+
+Add a header passed from the Apps component to the Users component.
+Add an age for each user.
+What if the age was optional, remove the age for a user.
+Add an invalid user, which means they have no name.
+
+video 4:
+https://www.youtube.com/watch?v=DJtI3Pogd88&list=PL7pEw9n3GkoVAqCMVTz2mKthyWr-svpQJ&index=4
+
+# React JS State and Props | setState with Virtual DOM | React.JS tutorial Series Part 4
 
 
 
