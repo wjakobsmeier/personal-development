@@ -170,6 +170,13 @@ https://www.youtube.com/watch?v=DJtI3Pogd88&list=PL7pEw9n3GkoVAqCMVTz2mKthyWr-sv
 
 # React JS State and Props | setState with Virtual DOM | React.JS tutorial Series Part 4
 
+State and props make react dynamic.
+State does it from the inside, props from the outside.
+Continuing with the previous example app where Users component is imported from the App component. The User component is imported from the Users component.
+
+To make this more dynamic we can use the state.
+Functional components are stateless so they can not have a state (this is outdated?)
+
 
 
 
